@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/css/intlTelInput.css" />
+  <title>BnB Registration</title>
+  <style>
+       body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin-left: 100px;
+      padding: 0;
+      width: 800px;
+      height: 800px;
+      margin:auto;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+      background-size: cover;
+      background-position: center;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    .form-container {
+      align-items: center;
+      width: 70%;
+      margin: 50px auto;
+      background-color: rgba(255, 255, 255, 0.9); /* Transparent background for a modern effect */
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .form-header {
+      margin-left: 50px;
+      text-align: center;
+      margin-bottom: 0px;
+    }
+
+    .form-header h1 {
+      margin-left: 10px;
+      color: #4caf50;
+      font-size: 32px;
+      margin-bottom: 10px;
+      animation: slideIn 0.5s ease-out;
+    }
+
+    @keyframes slideIn {
+      0% { transform: translateY(-20px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .form-header p {
+      color: #4caf50;
+      font-size: 16px;
+      font-style: italic;
+    }
+    .form-section h2{
+      margin-left: 115px;
+    }
+
+    .progress {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      position: relative;
+      transition: 0.4s;
+    }
+
+    .step {
+      width: 25px;
+      height: 25px;
+      background-color: #ccc;
+      border-radius: 50%;
+      transition: all 0.3s;
+    }
+
+    .step.active {
+      background-color: #4caf50;
+    }
+
+    .progress-indicator {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: 40px;
+      width: 100%;
+    }
+
+    .progress-indicator span {
+      font-size: 12px;
+      color: #333;
+    }
+
+    .form-section {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      margin-top: 20px;
+    }
+
+    .form-section.active {
+      display: block !important;
+      opacity: 1;
+    }
+
+    .field-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #4caf50;
+      font-size: 14px;
+      font-weight: bold;
+
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #4caf50;
+      box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+      outline: none;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      font-size: 16px;
+      margin-left: 250px;
+    }
+    .separet{
+      background-color: #4caf50;
+      margin-left: 250px;
+    }
+    button:hover {
+      background-color: #45a049;
+      transform: scale(1.05);
+    }
+    .phone-input-container {
+      display: flex;
+      flex-direction: column;
+      max-width: 300px;
+      margin: 20px auto;
+    }
+    .phone-input, .gender-marital-wrapper, .pets-wrapper {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .phone-input input, .gender-marital-wrapper select, .pets-wrapper select {
+      flex: 1;
+    }
+
+    .form-section h2 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .field-group .select-wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .field-group select {
+      width: 48%;
+    }
+
+    .gender-marital-wrapper .field-group, .pets-wrapper .field-group {
+      width: 48%;
+    }
+
+    .field-group input[type="number"] {
+      width: 48%;
+    }
+
+    /* Adding icons */
+    .input-icon {
+      position: absolute;
+      top: 14px;
+      left: 10px;
+      color: #4caf50;
+      font-size: 18px;
+    }
+
+    .field-group input {
+      padding-left: 30px;
+    }
+
+    .form-section img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      transition: opacity 0.3s ease;
+    }
+
+    .form-section img:hover {
+      opacity: 0.8;
+    }
+    .form-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .field-group {
+      margin-left: 115px;
+      align-items: center;
+      flex: 1 1 calc(50% - 20px); /* Two columns with a gap */
+      display: flex;
+      flex-direction: column;
+    }
+    .field-group1 {
+      align-items: center;
+      flex: 1 1 calc(50% - 20px); /* Two columns with a gap */
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 30px;
+    }
+    .field-group2 {
+      align-items: center;
+      flex: 1 1 calc(50% - 20px); /* Two columns with a gap */
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+    }
+    .field-group label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .field-group input,
+    .field-group select {
+      width:300px;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-section-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .iden{
+      margin-left: 110px;
+    }
+    .nextkin{
+      margin-left: 110px;
+    }
+    .form-container .phone-input-container {
+      margin-left: auto;
+      flex: 1 1 calc(50% - 20px);
+    }
+    .field-group1{
+      align-items: center;
+    }
+    .gender-marital-wrapper {
+      display: flex;
+      flex: 1 1 100%; /* Ensure it spans full width */
+      gap: 20px;
+    }
+
+    .gender-marital-wrapper .field-group {
+      flex: 1;
+    }
+    .h2{
+      text-align: center;
+      margin-left: 300px;
+    }
+    .personal{
+      margin-left: 200px;
+      color: #4caf50;
+    }
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; 
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      margin-left: 750px;
+      margin-top: 300px;
+      width: 400px; /* Full width */
+      height: 400px; /* Full height */
+
+    }
+
+    .modal-content {
+      align-items: center;
+      color: #4CAF50;
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.9);
+      margin: 15% auto; 
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Adjust width as necessary */
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-content button {
+      margin-right: 250px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .modal-content button:hover {
+      background-color: #45a049;
+    }
+
+    /* Fade-in animation */
+    .modal-content .fade-in {
+      opacity: 0;
+      transition: opacity 2s ease-in;
+    }
+
+    .modal-content.fade-in.show {
+      opacity: 1;
+    }
+    .hed{
+      margin-left: auto;
+    }
+  </style>
+</head>
+<body>
+    <form id="form-field">
+      <div  class="form-container">
+        <!-- BnB Registration Form -->
+        <div class="form-header" id="form-header">
+          <h1>Registration</h1>
+          <p>Please fill in all the following details to complete your registration</p>
+        </div>
+
+        <!-- Personal Details Section -->
+        <div id="section1" class="form-section"></div>
+          <h2 class="personal">Personal Details</h2>
+          <div class="form-section-grid">
+            <div class="field-group2">
+              <label for="fname">First Name:</label>
+              <div style="position: relative;">
+                <input type="text" id="fname" placeholder="Enter your first name" required style="width: min-content;">
+                <i class="input-icon"></i> <!-- Icon for first name -->
+              </div>
+            </div>
+        
+            <div class="field-group1">
+              <label for="lname">Last Name:</label>
+              <div style="position: relative;">
+                <input type="text" id="lname" placeholder="Enter your last name" required style="width: min-content;">
+                <i class="input-icon"></i> <!-- Icon for last name -->
+              </div>
+            </div>
+        
+            <div class="field-group1">
+              <label for="email">Email:</label>
+              <div style="position: relative;">
+                <input type="email" id="email" placeholder="Enter your email" required style="width: min-content;">
+                <i class="input-icon"></i> <!-- Email icon -->
+              </div>
+            </div>
+        
+            <div class="field-group phone-input-container">
+              <label for="phone">Phone Number:</label>
+              <input id="phone" type="tel" placeholder="Enter phone number" style="width: min-content;" pattern="[0-9]+" title="Please enter numbers only" inputmode="numeric"  />
+            </div>
+        
+            <div class="field-group1">
+              <label for="gender">Gender:</label>
+              <select id="gender" style="width: min-content;">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+        
+            <div class="field-group1">
+              <label for="marital-status">Marital Status:</label>
+              <select id="marital-status" style="width: min-content;">
+                <option value="Single">Single</option>
+                <option value="Married">Married</option>
+                <option value="Divorced">Divorced</option>
+              </select>
+            </div>
+          </div>
+        
+          <button class="separet" onclick="nextSection(2)">Next</button>
+      
+        <!-- Identity Section -->
+        <div id="section2" class="form-section">
+          <h2 class="iden" >Identity Details</h2>
+          <div class="field-group">
+            <label for="id-number">ID/Passport Number:</label>
+            <input type="text" id="id-number" placeholder="Enter your ID/Passport number" required>
+          </div>
+
+          <div class="field-group">
+            <label for="id-upload">Upload ID/passport Photo (front and back for ID card):</label>
+            <input type="file" id="id-upload" accept="image/*" multiple required>
+            <div id="image-preview"></div>
+          </div>
+
+          <button onclick="nextSection(3)">Next</button>
+        </div>
+        <!-- Next of Kin Section (Initially hidden) -->
+        <div id="section3" class="form-section">
+          <h2 class="nextkin" >Next of Kin</h2>
+          <div class="field-group">
+            <label for="next-of-kin-name">Next of Kin Name:</label>
+            <input type="text" id="next-of-kin-name" placeholder="Enter next of kin's name" required>
+          </div>
+
+          <div class="field-group">
+            <label for="next-of-kin-relationship">Relationship:</label>
+            <input type="text" id="next-of-kin-relationship" placeholder="Mother, Father, brother, colleague..." required>
+          </div>
+
+          <div class="field-group">
+            <label for="next-of-kin-phone">Next of Kin Phone Number:</label>
+            <input type="tel" id="next-of-kin-phone" placeholder="Enter next of kin's phone number" required>
+          </div>
+
+          <button onclick="nextSection(4)">Next</button>
+        </div>
+
+        <!-- Pets Section (Initially hidden) -->
+        <div id="section4" class="form-section">
+          <h2>Company</h2>
+
+          <!-- Question: Will they have company -->
+          <div class="field-group">
+            <label for="company-presence">Will you be having company?</label>
+            <select id="company-presence" onchange="handleCompanyPresence()" >
+              <option value="">Select...</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+
+          <!-- If yes, ask for type and count of guests -->
+          <div  id="company-details" style="display: none;">
+            <label style="margin-left: 150px; margin-bottom: 20px;">Enter the number of each type of guest:</label>
+            <div class="guest-counter">
+              <div class="field-group">
+                <label for="num-adults">Adults:</label>
+                <input type="number" id="num-adults" placeholder="Enter number of adults" min="0" value="0">
+              </div>
+              <div class="field-group">
+                <label for="num-teenagers">Teenagers:</label>
+                <input type="number" id="num-teenagers" placeholder="Enter number of teenagers" min="0" value="0">
+              </div>
+              <div class="field-group">
+                <label for="num-kids">Kids:</label>
+                <input type="number" id="num-kids" placeholder="Enter number of kids" min="0" value="0">
+              </div>
+              <div class="field-group">
+                <label for="num-infants">Infants:</label>
+                <input type="number" id="num-infants" placeholder="Enter number of infants" min="0" value="0">
+              </div>
+            </div>
+          </div>
+
+          <!-- Question: Will they have pets -->
+          <div class="field-group">
+            <label for="pet-presence">Will you be having any pets?</label>
+            <select id="pet-presence" onchange="handlePetPresence()" >
+              <option value="">Select...</option>
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+
+          <button onclick="nextSection(5)">Next</button>
+        </div>
+
+        <!-- Stay Details Section (Initially hidden) -->
+        <div id="section5" class="form-section">
+          <h2>Duration</h2>
+
+          <!-- Date Selection -->
+          <div class="field-group">
+            <label for="check-in">Check-in Date:</label>
+            <input type="date" id="check-in" required>
+          </div>
+
+          <div class="field-group">
+            <label for="check-out">Check-out Date:</label>
+            <input type="date" id="check-out" required>
+          </div>
+
+          <button onclick="validateDates()">Next</button>
+        </div>
+
+        <!-- Payment Section (Initially hidden) -->
+        <div id="section6" class="form-section">
+          <h2>Payment</h2>
+          <div class="field-group">
+            <label for="payment-method">Payment Method:</label>
+            <select id="payment-method" required>
+              <option value="M-Pesa">M-Pesa</option>
+            </select>
+          </div>
+          <button type="submit">Submit</button>
+        </div>
+      </div>
+    </form>
+
+    <div id="paymentModal" class="modal">
+      <div class="modal-content">
+        <h2>Payment Summary</h2>
+        <p>Total Amount: <span id="payAmount"></span></p>
+        <p>Contact us at:</p>
+        <p>Email: support@example.com</p>
+        <p>Phone: +1234567890</p>
+        <button onclick="closeModal()">Pay</button>
+
+      </div>
+    </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
+  <script>
+        document.getElementById("form-field").addEventListener('submit', function (event) {
+              console.log("button clicked")
+              event.preventDefault(); // Prevent form submission by default
+
+              console.log('getting the details')
+              const fname = document.getElementById('fname').value.trim();
+              const lname = document.getElementById('lname').value.trim();
+              const email = document.getElementById('email').value.trim();
+              const phone = document.getElementById('phone').value.trim();
+              const gender = document.getElementById('gender').value.trim();
+              const numadults = parseInt(document.getElementById('num-adults').value) || 0;
+              const numteenagers = parseInt(document.getElementById('num-teenagers').value) || 0;
+              const numkids = parseInt(document.getElementById('num-kids').value) || 0;
+              const numinfants = parseInt(document.getElementById('num-infants').value) || 0;
+              const maritalstatus = document.getElementById('marital-status').value.trim();
+              const idnumber = document.getElementById('id-number').value.trim();
+              const idupload = document.getElementById('id-upload').value.trim();
+              const nextofkinname = document.getElementById('next-of-kin-name').value.trim();
+              const nextofkinrelationship = document.getElementById('next-of-kin-relationship').value.trim();
+              const nextofkinphone = document.getElementById('next-of-kin-phone').value.trim();
+              const companypresence = document.getElementById('company-presence').value.trim();
+              const petpresence = document.getElementById('pet-presence').value.trim();
+              const checkin = new Date(document.getElementById('check-in').value);
+              const checkout = new Date(document.getElementById('check-out').value);
+              const paymentmethod = document.getElementById('payment-method').value.trim();
+              console.log('inout fields present')
+              // Validation
+              if (
+                !fname || !lname || !email || !phone || !gender || !maritalstatus || 
+                !idnumber || !nextofkinname || !nextofkinrelationship || 
+                !nextofkinphone || isNaN(checkin) || isNaN(checkout) || !paymentmethod
+              ) {
+                console.log('some input fields are missing')
+                alert("Please fill in all the required fields.");
+                return;
+              }
+
+              const totalguests = numadults + numteenagers + numkids + numinfants;
+              console.log('people number calculated')
+              if (companypresence === "Yes" && totalguests > 1) {
+                console.log('more people')
+                alert("The residence can only host a maximum of two individuals if a company is present.");
+                return;
+              }
+
+              if (petpresence === "Yes") {
+                console.log('pet present')
+                alert("We are sorry to inform you that pets are not allowed.");
+                return;
+              }
+
+              
+              
+              const Rate = 3000;
+              let totalAmount = 0;
+
+              let currentDate = new Date(checkin);
+              console.log('payment iteration')
+              while (currentDate < checkout) {
+                  totalAmount += Rate; 
+                  currentDate.setDate(currentDate.getDate() + 1);
+              }
+
+              console.log('payment  modal on display')
+              const modal = document.getElementById('paymentModal');
+              document.getElementById('payAmount').textContent = `Ksh. ${totalAmount}`;
+              modal.style.display = 'block';
+
+              
+              setTimeout(() => {
+                modal.classList.add('show');
+              }, 100);
+            });
+
+            // Close Modal Function
+            function closeModal() {
+              const formData = {
+                    fname,
+                    lname,
+                    email,
+                    phone,
+                    gender,
+                    numadults,
+                    numteenagers,
+                    numkids,
+                    numinfants,
+                    maritalstatus,
+                    idnumber,
+                    idupload,
+                    nextofkinname,
+                    nextofkinrelationship,
+                    nextofkinphone,
+                    companypresence,
+                    checkin,
+                    checkout,
+                    paymentmethod,
+                    totalAmount
+                  };
+
+                  fetch('http://localhost/payment', {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData) 
+                  })
+                    .then(response => response.json())
+                    .then(data => {
+                      console.log('Success:', data);
+                    })
+                    .catch(error => {
+                      console.error('Error:', error);
+                    });
+            }
+
+
+            function handlePetPresence() {
+            const petPresence = document.getElementById('pet-presence').value;
+
+            if (petPresence === 'Yes') {
+                alert('we are sorry but we dont allow pets')
+            } 
+          }
+
+            let currentSection = 1;
+
+            function nextSection(section) {
+              const prevSection = document.getElementById(`section${currentSection}`);
+              const nextSection = document.getElementById(`section${section}`);
+
+              if (prevSection && nextSection) {
+                nextSection.classList.add('active');
+                currentSection = section;
+                window.scrollTo({ top: nextSection.offsetTop, behavior: 'smooth' });
+              }
+            }
+            
+
+            document.getElementById('id-upload').addEventListener('change', function () {
+                  const fileInput = this;
+                  const previewContainer = document.getElementById('image-preview');
+                  previewContainer.innerHTML = '';
+                  const files = fileInput.files;
+                  if (files.length > 2) {
+                    alert('You can only upload a maximum of two images.');
+                    fileInput.value = ''; // Clear the file input
+                    return;
+                  }
+
+                  // Loop through selected files and display them
+                  Array.from(files).forEach(file => {
+                    const fileReader = new FileReader();
+
+                    fileReader.onload = function (e) {
+                      const img = document.createElement('img');
+                      img.src = e.target.result;
+                      img.style.width = '100px'; // Set preview size
+                      img.style.margin = '5px';
+                      img.alt = 'Uploaded Image';
+                      previewContainer.appendChild(img);
+                    };
+
+                    fileReader.readAsDataURL(file);
+                  });
+                });
+
+
+
+            document.getElementById('check-in').addEventListener('change', function () {
+              const checkInDate = this.value;
+              const checkOutInput = document.getElementById('check-out');
+              checkOutInput.setAttribute('min', checkInDate);
+            });
+            function handleCompanyPresence() {
+            const companyPresence = document.getElementById("company-presence").value;
+            const companyDetails = document.getElementById("company-details");
+
+            if (companyPresence === "Yes") {
+              companyDetails.style.display = "block";
+            } else {
+              companyDetails.style.display = "none";
+              resetGuestCounters(); 
+            }
+              }
+
+          function resetGuestCounters() {
+            document.getElementById("num-adults").value = 0;
+            document.getElementById("num-teenagers").value = 0;
+            document.getElementById("num-kids").value = 0;
+            document.getElementById("num-infants").value = 0;
+          }
+          function getTodayDate() {
+              const today = new Date();
+              const yyyy = today.getFullYear();
+              const mm = String(today.getMonth() + 1).padStart(2, "0");
+              const dd = String(today.getDate()).padStart(2, "0");
+              return `${yyyy}-${mm}-${dd}`;
+            }
+
+            function validateDates() {
+              const checkIn = document.getElementById("check-in").value;
+              const checkOut = document.getElementById("check-out").value;
+              const today = getTodayDate();
+
+              // Ensure both dates are selected
+              if (!checkIn || !checkOut) {
+                alert("Please select both check-in and check-out dates.");
+                return;
+              }
+
+              // Ensure check-in date is not in the past
+              if (checkIn < today) {
+                alert("Check-in date cannot be in the past.");
+                return;
+              }
+
+              // Ensure check-out date is after check-in date
+              if (checkOut <= checkIn) {
+                alert("Check-out date must be after the check-in date.");
+                return;
+              }
+
+              // Proceed to the next section if all validations pass
+              nextSection(6);
+            }
+
+        // Set minimum selectable date dynamically
+        document.getElementById("check-in").setAttribute("min", getTodayDate());
+        document.getElementById("check-in").addEventListener("change", function () {
+          const checkInDate = this.value;
+          const checkOutInput = document.getElementById("check-out");
+          checkOutInput.setAttribute("min", checkInDate);
+        })
+        const phoneInput = document.querySelector("#phone");
+        window.intlTelInput(phoneInput, {
+          initialCountry: "ke",
+          preferredCountries: ["us", "ke", "gb", "au"],
+          geoIpLookup: (callback) => {
+            // Use an external service to get the user's country
+            fetch("https://ipinfo.io/json?token=<your_token_here>")
+              .then((response) => response.json())
+              .then((data) => callback(data.country))
+              .catch(() => callback("us"));
+          },
+          utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/utils.js",
+        });
+        function showCustomInput() {
+          var selectElement = document.getElementById('pet-type-selector');
+          var customOptionDiv = document.getElementById('customOptionDiv');
+          var customOptionInput = document.getElementById('customOption');
+
+          // Show the input field if "Other" is selected
+          if (selectElement.value === "Other") {
+            customOptionDiv.style.display = 'block';
+          } else {
+            customOptionDiv.style.display = 'none';
+            customOptionInput.value = ''; // Clear the input field
+          }
+        }
+  </script>
+</body>
+</html>
+
+
+
+
+

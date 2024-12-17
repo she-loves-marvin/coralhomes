@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beautiful Beachside Villa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- Using CDN for Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f9f7;
+      margin: 0;
+      padding: 0;
+    }
+    .property-overview {
+      width: 80%;
+      margin: 40px auto;
+      text-align: center;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    .property-image {
+      width: 50px;
+      height: 100px;
+      margin-bottom: 100px;
+      border-radius: 12px;
+      transition: transform 0.4s ease-in-out;
+    }
+    .property-image:hover {
+      transform: scale(1.1);
+    }
+    .property-details {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #555;
+      line-height: 1.6;
+      
+    }
+    .property-details h2 {
+      font-size: 28px;
+      color: #2e7d32;
+      font-weight: 600;
+    }
+    .price {
+      color: #388e3c;
+      font-size: 22px;
+      font-weight: 600;
+    }
+    .property-gallery {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .property-gallery img {
+      width: 500px;
+      height: 600px;
+      border-radius: 12px;
+      transition: transform 0.3s;
+    }
+    .property-gallery .fimg {
+      width: 300px; 
+      height: 400px; 
+    }
+    .property-gallery img:nth-child(2) {
+      width: 500px; 
+      height: 600px; 
+    }
+    .property-gallery img:hover {
+      transform: scale(1.05);
+    }
+    .amenities-list {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 16px;
+      color: #555;
+    }
+    .amenities-list ul {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .amenities-list ul li {
+      display: flex;
+      align-items: center;
+      margin: 10px;
+      font-size: 18px;
+      width: 30%;
+      justify-content: center;
+      text-align: center;
+      transition: color 0.3s, transform 0.3s;
+    }
+    .amenities-list ul li:hover {
+      color: #4caf50;
+      transform: scale(1.05);
+    }
+    .amenities-list ul li i {
+      margin-right: 10px;
+      color: black;
+      font-size: 20px;
+    }
+    .book-now-btn {
+      margin-top: 30px;
+      padding: 15px 30px;
+      background-color: #4caf50;
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s ease-in-out;
+    }
+    .book-now-btn:hover {
+      background-color: #45a049;
+      transform: scale(1.05);
+    }
+    .book-now-btn:active {
+      transform: scale(0.98);
+    }
+    .property-address {
+      margin-top: 40px;
+      font-size: 18px;
+      color: #555;
+    }
+    .property-address h3 {
+      font-size: 24px;
+      color: #388e3c;
+    }
+    .property-address p {
+      font-size: 18px;
+    }
+    .reviews-section {
+      margin-top: 40px;
+      padding: 20px;
+      background-color: #f1f1f1;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    .reviews-section h3 {
+      font-size: 24px;
+      color: #2e7d32;
+    }
+    .review-item {
+      margin-bottom: 15px;
+    }
+    .review-item h4 {
+      font-size: 20px;
+      color: #2e7d32;
+    }
+    .review-item p {
+      font-size: 16px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="property-overview">
+    <img src="property-image.jpg" alt="Property Image" class="property-image">
+    <div class="property-gallery">
+        <img class="fimg" src="room1.jpeg" alt="Interior 1">
+        <img src="room2.jpeg" alt="Interior 2">
+        <img class="fimg" src="room2.jpeg" alt="Interior 2">
+    </div>
+    <div class="property-details">
+      <h2>Coral Homes</h2>
+      <p>Located right in Rongai, this space offers breathtaking views from the top, modern amenities, and a relaxing atmosphere.</p>
+      <p class="price">ksh. 3000 per night</p>
+      <p>This cozy Studio Apartment is located in a convenient and accessible area near Laiser Hill Academy in Rongai, Kenya. It offers a perfect combination of comfort and practicality, making it an ideal choice for a short stay or a budget-friendly option for those looking to experience the charm of the area. With its simple yet functional design, this Studio Apartment ensures a comfortable and affordable living space for guests.</p>
+    </div>
+
+    
+
+    <div class="amenities-list">
+      <h3>Amenities:</h3>
+      <ul>
+        <li><i class="fas fa-wifi"></i> Free Wi-Fi</li>
+        <li><i class="fas fa-swimming-pool"></i> Swimming Pool</li>
+        <li><i class="fas fa-parking"></i> Spacious Parking</li>
+        <li><i class="fas fa-utensils"></i> Fully Equipped Kitchen</li>
+        <li><i class="fas fa-shield-alt"></i> 24/7 Security</li>
+        <li><i class="fas fa-birthday-cake"></i> Barbecue Area</li>
+        <li><i class="fas fa-bed"></i> 1 Bed</li>
+        <li><i class="fas fa-bath"></i> Spacious Bathroom</li>
+        <li><i class="fas fa-dumbbell"></i> Fitness Center</li>
+        <li><i class="fas fa-tv"></i> Smart TV</li>
+        <li><i class="fas fa-water"></i> Hot Tub</li>
+        <li><i class="fas fa-suitcase-rolling"></i> Luggage Storage</li>
+      </ul>
+    </div>
+
+    <div class="property-address">
+      <h3>Location</h3>
+      <p>Tsavo Apartments, Rongai, Kajiado County</p>
+    </div>
+
+    <a href="registration-form.html">
+      <button class="book-now-btn">Book Now</button>
+    </a>
+  </div>
+</body>
+</html>
